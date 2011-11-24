@@ -6,7 +6,7 @@
     <artifactId>yambla</artifactId>
     <version>1</version>
     <packaging>apk</packaging>
-    <name>yambla</name>
+    <name>${artifactId}</name>
 
     <dependencies>
         <dependency>

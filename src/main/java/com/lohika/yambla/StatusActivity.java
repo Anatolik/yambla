@@ -1,12 +1,11 @@
-package com.lohika.akaverin;
+package com.lohika.yambla;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import com.lohika.akaverin.R;
 
-public class HelloAndroidActivity extends Activity {
-
-    private static String TAG = "android-app";
+public class StatusActivity extends Activity {
 
     /**
      * Called when the activity is first created.
@@ -17,7 +16,6 @@ public class HelloAndroidActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
     }
 
