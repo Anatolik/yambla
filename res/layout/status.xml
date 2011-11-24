@@ -9,7 +9,7 @@
             android:layout_width="fill_parent" android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="30sp" android:layout_margin="10dp"
-            android:text="@string/status_text"
+            android:text="@string/status_title"
             />
     <!-- Status message -->
     <EditText
@@ -21,7 +21,7 @@
     <!-- Update button -->
     <Button
             android:layout_width="fill_parent" android:layout_height="wrap_content"
-            android:text="@string/status_button"
+            android:text="@string/status_button_label"
             android:textSize="20sp" android:id="@+id/status_button"
             />
 </LinearLayout>
