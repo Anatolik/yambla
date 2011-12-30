@@ -11,6 +11,12 @@
             android:textSize="30sp" android:layout_margin="10dp"
             android:text="@string/status_title"
             />
+    <!-- Counter -->
+    <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="right" android:id="@+id/status_textCount"
+            android:text="000" android:layout_marginRight="10dp"
+            />
     <!-- Status message -->
     <EditText
             android:layout_width="fill_parent" android:layout_height="fill_parent"
