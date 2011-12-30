@@ -12,7 +12,7 @@ import winterwell.jtwitter.TwitterException;
 
 public class StatusActivity extends Activity implements View.OnClickListener {
 
-    Twitter twitter;
+    private Twitter twitter;
     private EditText editText;
 
     /**
@@ -32,6 +32,7 @@ public class StatusActivity extends Activity implements View.OnClickListener {
         Button updateButton = (Button) findViewById(R.id.status_button);
         updateButton.setOnClickListener(this);
 
+        //noinspection deprecation
         twitter = new Twitter("askme", "123456");
         twitter.setAPIRootUrl("http://yamba.marakana.com/api");
     }
@@ -42,7 +43,7 @@ public class StatusActivity extends Activity implements View.OnClickListener {
         new PostToTwitter().execute(status);
     }
 
-    class PostToTwitter extends AsyncTask<String, Integer, String> {
+    private class PostToTwitter extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... statuses) {
