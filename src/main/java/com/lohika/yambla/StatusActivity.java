@@ -14,7 +14,6 @@ public class StatusActivity extends Activity implements View.OnClickListener {
 
     Twitter twitter;
     private EditText editText;
-    private Button updateButton;
 
     /**
      * Called when the activity is first created.
@@ -29,11 +28,11 @@ public class StatusActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.status);
 
         editText = (EditText) findViewById(R.id.status_edit);
-        updateButton = (Button) findViewById(R.id.status_button);
 
+        Button updateButton = (Button) findViewById(R.id.status_button);
         updateButton.setOnClickListener(this);
 
-        twitter = new Twitter("student", "password");
+        twitter = new Twitter("askme", "123456");
         twitter.setAPIRootUrl("http://yamba.marakana.com/api");
     }
 
@@ -59,8 +58,7 @@ public class StatusActivity extends Activity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(StatusActivity.this, result, Toast.LENGTH_LONG).show();
-
+            Toast.makeText(StatusActivity.this, result, Toast.LENGTH_SHORT).show();
         }
     }
 }
