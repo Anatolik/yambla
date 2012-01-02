@@ -23,14 +23,14 @@
     <EditText
             android:layout_width="fill_parent" android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:hint="@string/status_edit_hint" android:id="@+id/status_edit"
+            android:hint="@string/status_hint_edit" android:id="@+id/status_edit"
             android:gravity="top|center_horizontal"
             android:background="#cfff"
             />
     <!-- Update button -->
     <Button
             android:layout_width="fill_parent" android:layout_height="wrap_content"
-            android:text="@string/status_button_label"
+            android:text="@string/status_label_button"
             android:textSize="20sp" android:id="@+id/status_button"
             />
 </LinearLayout>

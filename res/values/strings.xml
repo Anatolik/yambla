@@ -2,7 +2,20 @@
 <resources>
     <string name="hello">Hello android-app!</string>
     <string name="app_name">yambla</string>
+
     <string name="status_title">Status Update</string>
-    <string name="status_edit_hint">Please, enter your 140-character status</string>
-    <string name="status_button_label">Update</string>
+    <string name="status_hint_edit">Please, enter your 140-character status</string>
+    <string name="status_label_button">Update</string>
+
+    <string name="pref_title_username">Username</string>
+    <string name="pref_summary_username">Please enter your username</string>
+    <string name="pref_title_password">Password</string>
+    <string name="pref_summary_password">Please enter your password</string>
+    <string name="pref_title_apiroot">Server URL</string>
+    <string name="pref_summary_apiroot">URL of Root API for your service</string>
+    <string name="pref_key_username">username</string>
+    <string name="pref_key_password">password</string>
+    <string name="pref_key_apiRoot">apiRoot</string>
+
+    <string name="menu_title_prefs">Settings</string>
 </resources>
