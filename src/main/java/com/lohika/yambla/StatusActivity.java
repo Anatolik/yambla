@@ -2,11 +2,9 @@ package com.lohika.yambla;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,24 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 
-public class StatusActivity extends Activity implements View.OnClickListener, TextWatcher, SharedPreferences.OnSharedPreferenceChangeListener {
+public class StatusActivity extends Activity implements View.OnClickListener, TextWatcher {
     private static final String TAG = StatusActivity.class.getSimpleName();
 
     public static final int TWIT_LENGTH = 140;
-    /**
-     * Library used to communicate with remote services
-     */
-    private Twitter twitter;
 
     private EditText editText;
     private TextView textCount;
-    /**
-     * Our reference to preferences service
-     */
-    SharedPreferences preferences;
 
     /**
      * Called when the activity is first created.
@@ -58,9 +47,6 @@ public class StatusActivity extends Activity implements View.OnClickListener, Te
         textCount = (TextView) findViewById(R.id.status_textCount);
         textCount.setText(Integer.toString(TWIT_LENGTH));
         textCount.setTextColor(Color.GREEN);
-
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -106,29 +92,6 @@ public class StatusActivity extends Activity implements View.OnClickListener, Te
         return true;
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        //invalidate current instance
-        twitter = null;
-        Log.d(TAG, "got preferences changed notification");
-    }
-
-    private Twitter getTwitter() {
-        if (twitter == null) {
-            Log.d(TAG, "Recreating Twitter object.");
-            String user, pass, apiRoot;
-            user = preferences.getString(getResources().getString(R.string.pref_key_username), "");
-            pass = preferences.getString(getResources().getString(R.string.pref_key_password), "");
-            apiRoot = preferences.getString(getResources().getString(R.string.pref_key_apiRoot),
-                    "http://yamba.marakana.com/api");
-
-            //noinspection deprecation
-            twitter = new Twitter(user, pass);
-            twitter.setAPIRootUrl(apiRoot);
-        }
-        return twitter;
-    }
-
     private class PostToTwitter extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -136,7 +99,8 @@ public class StatusActivity extends Activity implements View.OnClickListener, Te
             try {
                 Log.d(TAG, "start Async task call...");
 
-                winterwell.jtwitter.Status status = getTwitter().updateStatus(statuses[0]);
+                YamblaApplication application = (YamblaApplication) getApplication();
+                winterwell.jtwitter.Status status = application.getTwitter().updateStatus(statuses[0]);
                 return status.text;
 
             } catch (TwitterException e) {
