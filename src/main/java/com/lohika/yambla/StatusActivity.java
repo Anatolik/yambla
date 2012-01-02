@@ -88,6 +88,14 @@ public class StatusActivity extends Activity implements View.OnClickListener, Te
             case R.id.itemPrefs:
                 startActivity(new Intent(this, PrefsActivity.class));
                 break;
+
+            case R.id.item_service_start:
+                startService(new Intent(this, UpdaterService.class));
+                break;
+
+            case R.id.item_service_stop:
+                stopService(new Intent(this, UpdaterService.class));
+                break;
         }
         return true;
     }

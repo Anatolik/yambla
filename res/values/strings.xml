@@ -18,4 +18,6 @@
     <string name="pref_key_apiRoot">apiRoot</string>
 
     <string name="menu_title_prefs">Settings</string>
+    <string name="menu_title_service_start">Start Service</string>
+    <string name="menu_title_service_stop">Stop Service</string>
 </resources>

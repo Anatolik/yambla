@@ -13,6 +13,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PrefsActivity"/>
+        <service android:name=".UpdaterService"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

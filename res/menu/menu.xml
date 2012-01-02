@@ -3,4 +3,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/itemPrefs" android:title="@string/menu_title_prefs"
           android:icon="@android:drawable/ic_menu_preferences"/>
+    <item android:title="@string/menu_title_service_start" android:id="@+id/item_service_start"
+          android:icon="@android:drawable/ic_media_play"/>
+    <item android:title="@string/menu_title_service_stop" android:id="@+id/item_service_stop"
+          android:icon="@android:drawable/ic_media_pause"/>
 </menu>
