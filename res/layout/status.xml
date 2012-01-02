@@ -3,6 +3,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:background="@drawable/background"
         >
     <!-- Title -->
     <TextView
@@ -10,6 +11,7 @@
             android:gravity="center"
             android:textSize="30sp" android:layout_margin="10dp"
             android:text="@string/status_title"
+            android:textColor="@android:color/black"
             />
     <!-- Counter -->
     <TextView
@@ -23,6 +25,7 @@
             android:layout_weight="1"
             android:hint="@string/status_edit_hint" android:id="@+id/status_edit"
             android:gravity="top|center_horizontal"
+            android:background="#cfff"
             />
     <!-- Update button -->
     <Button
