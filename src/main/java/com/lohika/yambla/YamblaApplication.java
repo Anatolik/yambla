@@ -17,6 +17,7 @@ import static android.content.SharedPreferences.OnSharedPreferenceChangeListener
  */
 public class YamblaApplication extends Application implements OnSharedPreferenceChangeListener {
     private static final String TAG = YamblaApplication.class.getSimpleName();
+
     public static final String DEFAULT_SERVER_API = "http://yamba.marakana.com/api";
     /**
      * Library used to communicate with remote services
@@ -26,6 +27,10 @@ public class YamblaApplication extends Application implements OnSharedPreference
      * Our reference to preferences service
      */
     SharedPreferences preferences;
+    /**
+     * helper method for us to be aware if service is running
+     */
+    private boolean isServiceRunning;
 
     @Override
     public void onCreate() {
@@ -67,5 +72,13 @@ public class YamblaApplication extends Application implements OnSharedPreference
             twitter.setAPIRootUrl(apiRoot);
         }
         return twitter;
+    }
+
+    public boolean isServiceRunning() {
+        return isServiceRunning;
+    }
+
+    public void setServiceRunning(boolean serviceRunning) {
+        isServiceRunning = serviceRunning;
     }
 }
