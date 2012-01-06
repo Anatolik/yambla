@@ -4,7 +4,7 @@
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8"/>
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true"
+    <application android:icon="@drawable/twitter_icon" android:label="@string/app_name" android:debuggable="true"
                  android:name=".YamblaApplication">
         <activity android:name=".StatusActivity">
             <intent-filter>
