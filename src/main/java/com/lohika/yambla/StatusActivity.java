@@ -21,7 +21,7 @@ import winterwell.jtwitter.TwitterException;
 public class StatusActivity extends Activity implements View.OnClickListener, TextWatcher {
     private static final String TAG = StatusActivity.class.getSimpleName();
 
-    public static final int TWIT_LENGTH = 140;
+    private static final int TWIT_LENGTH = 140;
 
     private EditText editText;
     private TextView textCount;
