@@ -103,6 +103,10 @@ public class StatusData {
         return db.query(TABLE, null, null, null, null, null, GET_ALL_ORDER_BY);
     }
 
+    public void purge() {
+        // TODO: implement
+    }
+
     /**
      * Our DB helper class
      * Created by IntelliJ IDEA.

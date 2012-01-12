@@ -1,16 +1,11 @@
 package com.lohika.yambla;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import winterwell.jtwitter.TwitterException;
 
-public class StatusActivity extends Activity implements View.OnClickListener, TextWatcher {
+public class StatusActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
     private static final String TAG = StatusActivity.class.getSimpleName();
 
     private static final int TWIT_LENGTH = 140;
@@ -75,30 +70,6 @@ public class StatusActivity extends Activity implements View.OnClickListener, Te
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.itemPrefs:
-                startActivity(new Intent(this, PrefsActivity.class));
-                break;
-
-            case R.id.item_service_start:
-                startService(new Intent(this, UpdaterService.class));
-                break;
-
-            case R.id.item_service_stop:
-                stopService(new Intent(this, UpdaterService.class));
-                break;
-        }
-        return true;
-    }
 
     private class PostToTwitter extends AsyncTask<String, Integer, String> {
 
@@ -107,7 +78,6 @@ public class StatusActivity extends Activity implements View.OnClickListener, Te
             try {
                 Log.d(TAG, "start Async task call...");
 
-                YamblaApplication application = (YamblaApplication) getApplication();
                 winterwell.jtwitter.Status status = application.getTwitter().updateStatus(statuses[0]);
                 return status.text;
 

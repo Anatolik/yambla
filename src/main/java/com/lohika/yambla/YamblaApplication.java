@@ -128,6 +128,10 @@ public class YamblaApplication extends Application implements OnSharedPreference
         return statusData;
     }
 
+    public SharedPreferences getPreferences() {
+        return preferences;
+    }
+
     public boolean isServiceRunning() {
         return isServiceRunning;
     }
