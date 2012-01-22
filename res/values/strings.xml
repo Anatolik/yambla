@@ -27,4 +27,10 @@
     <!-- messages -->
     <string name="msg_setup_prefs">Please, provide settings for application</string>
     <string name="msg_data_purged">All cached data was purged successfully</string>
+
+    <!-- permissions -->
+    <string name="permission_send_timeline_notification_label">Send timeline notification permission</string>
+    <string name="permission_send_timeline_notification_desc">Used to let listen only specified broadcasters</string>
+    <string name="permission_receive_timeline_notification_label">Receive timeline notification permission</string>
+    <string name="permission_receive_timeline_notification_desc">Used to broadcast only to specified listeners</string>
 </resources>

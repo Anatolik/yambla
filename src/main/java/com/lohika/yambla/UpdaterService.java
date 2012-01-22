@@ -16,6 +16,11 @@ public class UpdaterService extends Service {
     private static final String TAG = UpdaterService.class.getSimpleName();
 
     private static final int DELAY = 60 * 1000; //a minute delay
+
+    public static final String NEW_STATUS_INTENT = "com.lohika.yambla.NEW_STATUS_INTENT";
+    public static final String NEW_STATUS_EXTRA_COUNT = "NEW_STATUS_EXTRA_COUNT";
+
+    public static final String RECEIVE_TIMELINE_NOTIFICATIONS = "com.lohika.yambla.RECEIVE_TIMELINE_NOTIFICATIONS";
     /**
      * flag for thread control
      */
@@ -72,17 +77,20 @@ public class UpdaterService extends Service {
 
         @Override
         public void run() {
-            UpdaterService service = UpdaterService.this;
-            while (service.isRunning) {
+            while (isRunning) {
                 Log.d(TAG, "Running background thread");
                 try {
                     int newUpdates = application.fetchStatusUpdates();
                     if (newUpdates > 0) {
                         Log.d(TAG, "We have a new status updates");
+
+                        Intent intent = new Intent(NEW_STATUS_INTENT);
+                        intent.putExtra(NEW_STATUS_EXTRA_COUNT, newUpdates);
+                        sendBroadcast(intent, RECEIVE_TIMELINE_NOTIFICATIONS);
                     }
                     Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
-                    service.isRunning = false;
+                    isRunning = false;
                     Log.d(TAG, "interrupted");
                 }
             }

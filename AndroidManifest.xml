@@ -15,9 +15,36 @@
             </intent-filter>
         </activity>
         <service android:name=".UpdaterService"/>
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".NetworkReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
+    <!-- our custom permissions -->
+    <permission android:name="com.lohika.yambla.SEND_TIMELINE_NOTIFICATIONS"
+                android:label="@string/permission_send_timeline_notification_label"
+                android:description="@string/permission_send_timeline_notification_desc"
+                android:permissionGroup="android.permission-group.PERSONAL_INFO"
+                android:protectionLevel="normal"/>
+    <permission android:name="com.lohika.yambla.RECEIVE_TIMELINE_NOTIFICATIONS"
+                android:label="@string/permission_receive_timeline_notification_label"
+                android:description="@string/permission_receive_timeline_notification_desc"
+                android:permissionGroup="android.permission-group.PERSONAL_INFO"
+                android:protectionLevel="normal"/>
+
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="com.lohika.yambla.SEND_TIMELINE_NOTIFICATIONS"/>
+    <uses-permission android:name="com.lohika.yambla.RECEIVE_TIMELINE_NOTIFICATIONS"/>
 
 </manifest>
 
