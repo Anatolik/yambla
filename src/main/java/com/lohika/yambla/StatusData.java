@@ -20,7 +20,7 @@ public class StatusData {
 
     private static final String DB_NAME = "timeline.db";
     private static final int DB_VERSION = 1;
-    private static final String TABLE = "timeline";
+    static final String TABLE = "timeline";
 
     static final String C_ID = BaseColumns._ID;
     static final String C_CREATED_AT = "created_at";
@@ -43,16 +43,21 @@ public class StatusData {
         dbHelper.close();
     }
 
+    public DBHelper getDBHelper() {
+        return dbHelper;
+    }
+
     /**
      * Performs insertion into DB
      *
      * @param values to be inserted into DB
+     * @return id of inserted value or -1 if failed to insert
      */
-    public void insertOrIgnore(ContentValues values) {
+    public long insertOrIgnore(ContentValues values) {
         Log.d(TAG, "insertOrIgnore on " + values);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         try {
-            db.insertWithOnConflict(TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+            return db.insertWithOnConflict(TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         } finally {
             db.close();
         }

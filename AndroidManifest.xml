@@ -25,6 +25,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
+        <provider android:name=".StatusProvider" android:authorities="com.lohika.yambla.provider"/>
     </application>
 
     <!-- our custom permissions -->
