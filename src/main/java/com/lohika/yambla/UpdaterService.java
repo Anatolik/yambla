@@ -17,7 +17,7 @@ public class UpdaterService extends Service {
 
     private static final int DELAY = 60 * 1000; //a minute delay
 
-    public static final String NEW_STATUS_INTENT = "com.lohika.yambla.NEW_STATUS_INTENT";
+    public static final String NEW_STATUS_INTENT = "com.lohika.yambla.NEW_STATUS";
     public static final String NEW_STATUS_EXTRA_COUNT = "NEW_STATUS_EXTRA_COUNT";
 
     public static final String RECEIVE_TIMELINE_NOTIFICATIONS = "com.lohika.yambla.RECEIVE_TIMELINE_NOTIFICATIONS";
