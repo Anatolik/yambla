@@ -7,6 +7,9 @@
     <string name="status_hint_edit">Please, enter your 140-character status</string>
     <string name="status_label_button">Update</string>
 
+    <string name="pref_title_category1">Account</string>
+    <string name="pref_title_category2">Other</string>
+
     <string name="pref_title_username">Username</string>
     <string name="pref_summary_username">Please enter your username</string>
     <string name="pref_title_password">Password</string>
@@ -17,6 +20,19 @@
     <string name="pref_key_password">password</string>
     <string name="pref_key_apiRoot">apiRoot</string>
     <string name="pref_title">Settings</string>
+    <string name="pref_key_provider">provider</string>
+    <string name="pref_title_provider">Geo provider</string>
+    <string name="pref_summary_provider">Provider to be used for location tags</string>
+    <string-array name="providers">
+        <item>None, please</item>
+        <item>GPS via satellites</item>
+        <item>Mobile network</item>
+    </string-array>
+    <string-array name="providerValues">
+        <item>NONE</item>
+        <item>gps</item>
+        <item>network</item>
+    </string-array>
 
     <string name="menu_title_service_start">Start Service</string>
     <string name="menu_title_service_stop">Stop Service</string>

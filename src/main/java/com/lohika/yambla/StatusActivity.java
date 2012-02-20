@@ -1,6 +1,9 @@
 package com.lohika.yambla;
 
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,21 +16,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 import winterwell.jtwitter.TwitterException;
 
-public class StatusActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
+public class StatusActivity extends BaseActivity implements View.OnClickListener, TextWatcher, LocationListener {
     private static final String TAG = StatusActivity.class.getSimpleName();
 
     private static final int TWIT_LENGTH = 140;
 
+    private static final long LOCATION_MIN_TIME = 3600000; //1 hour
+    private static final float LOCATION_MIN_DISTANCE = 1000; //1 km
+
+
     private EditText editText;
     private TextView textCount;
 
-    /**
-     * Called when the activity is first created.
-     *
-     * @param savedInstanceState If the activity is being re-initialized after
-     *                           previously being shut down then this Bundle contains the data it most
-     *                           recently supplied in onSaveInstanceState(Bundle). <b>Note: Otherwise it is null.</b>
-     */
+    LocationManager locationManager;
+    Location location;
+    String provider;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,33 @@ public class StatusActivity extends BaseActivity implements View.OnClickListener
         textCount = (TextView) findViewById(R.id.status_textCount);
         textCount.setText(Integer.toString(TWIT_LENGTH));
         textCount.setTextColor(Color.GREEN);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        provider = application.getProvider();
+        if (!YamblaApplication.DEFAULT_LOCATION_PROVIDER.equals(provider)) {
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        }
+        if (locationManager != null) {
+            location = locationManager.getLastKnownLocation(provider);
+            requestLocationUpdates();
+        }
+    }
+
+    private void requestLocationUpdates() {
+        locationManager.requestLocationUpdates(provider, LOCATION_MIN_TIME, LOCATION_MIN_DISTANCE, this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (locationManager != null) {
+            locationManager.removeUpdates(this);
+        }
     }
 
     @Override
@@ -70,6 +101,29 @@ public class StatusActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        this.location = location;
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        if (this.provider.equals(provider)) {
+            requestLocationUpdates();
+        }
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        if (this.provider.endsWith(provider)) {
+            locationManager.removeUpdates(this);
+        }
+    }
+
 
     private class PostToTwitter extends AsyncTask<String, Integer, String> {
 
@@ -78,6 +132,10 @@ public class StatusActivity extends BaseActivity implements View.OnClickListener
             try {
                 Log.d(TAG, "start Async task call...");
 
+                if (location != null) {
+                    double latitude[] = {location.getLatitude(), location.getLongitude()};
+                    application.getTwitter().setMyLocation(latitude);
+                }
                 winterwell.jtwitter.Status status = application.getTwitter().updateStatus(statuses[0]);
                 return status.text;
 

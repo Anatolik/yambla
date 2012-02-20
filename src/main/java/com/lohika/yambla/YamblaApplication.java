@@ -23,6 +23,7 @@ public class YamblaApplication extends Application implements OnSharedPreference
     private static final String TAG = YamblaApplication.class.getSimpleName();
 
     private static final String DEFAULT_SERVER_API = "http://yamba.marakana.com/api";
+    static final String DEFAULT_LOCATION_PROVIDER = "NONE";
     /**
      * Library used to communicate with remote services
      */
@@ -138,5 +139,9 @@ public class YamblaApplication extends Application implements OnSharedPreference
 
     public void setServiceRunning(boolean serviceRunning) {
         isServiceRunning = serviceRunning;
+    }
+
+    public String getProvider() {
+        return preferences.getString(getString(R.string.pref_key_provider), DEFAULT_LOCATION_PROVIDER);
     }
 }
