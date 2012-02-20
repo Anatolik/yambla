@@ -11,6 +11,6 @@
     <item android:id="@+id/menu_purge" android:title="@string/menu_purge"
           android:icon="@android:drawable/ic_menu_delete"/>
 
-    <item android:title="@string/menu_title_service_start" android:id="@+id/menu_toggle_service"
-          android:icon="@android:drawable/ic_media_play"/>
+    <item android:id="@+id/menu_refresh" android:title="@string/menu_refresh"
+          android:icon="@android:drawable/ic_menu_rotate"/>
 </menu>

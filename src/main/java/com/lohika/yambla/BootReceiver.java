@@ -15,8 +15,10 @@ import android.util.Log;
 public class BootReceiver extends BroadcastReceiver {
     private static final String TAG = BootReceiver.class.getSimpleName();
 
-    public void onReceive(Context context, Intent intent) {
-        context.startService(new Intent(context, UpdaterService.class));
+    public void onReceive(Context context, Intent aIntent) {
+        YamblaApplication.createServiceAlarm(context);
+
         Log.d(TAG, "onReceived");
     }
+
 }

@@ -23,26 +23,20 @@
     <string name="pref_key_provider">provider</string>
     <string name="pref_title_provider">Geo provider</string>
     <string name="pref_summary_provider">Provider to be used for location tags</string>
-    <string-array name="providers">
-        <item>None, please</item>
-        <item>GPS via satellites</item>
-        <item>Mobile network</item>
-    </string-array>
-    <string-array name="providerValues">
-        <item>NONE</item>
-        <item>gps</item>
-        <item>network</item>
-    </string-array>
+    <string name="pref_key_interval">interval</string>
+    <string name="pref_title_interval">Update interval</string>
+    <string name="pref_summary_interval">Interval between our service updates</string>
 
-    <string name="menu_title_service_start">Start Service</string>
-    <string name="menu_title_service_stop">Stop Service</string>
     <string name="menu_purge">Purge</string>
+    <string name="menu_refresh">Refresh</string>
 
     <string name="timeline_title">Timeline</string>
 
     <!-- messages -->
     <string name="msg_setup_prefs">Please, provide settings for application</string>
     <string name="msg_data_purged">All cached data was purged successfully</string>
+    <string name="msg_notification_title">Updates from Yambla...</string>
+    <string name="msg_notification_summary">Recevied %d new messages, click to read...</string>
 
     <!-- permissions -->
     <string name="permission_send_timeline_notification_label">Send timeline notification permission</string>

@@ -1,7 +1,11 @@
 package com.lohika.yambla;
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -24,6 +28,7 @@ public class YamblaApplication extends Application implements OnSharedPreference
 
     private static final String DEFAULT_SERVER_API = "http://yamba.marakana.com/api";
     static final String DEFAULT_LOCATION_PROVIDER = "NONE";
+    static final long INTERVAL_NEVER = 0;
     /**
      * Library used to communicate with remote services
      */
@@ -33,13 +38,13 @@ public class YamblaApplication extends Application implements OnSharedPreference
      */
     private SharedPreferences preferences;
     /**
-     * helper method for us to be aware if service is running
-     */
-    private boolean isServiceRunning;
-    /**
      * Shared instance of status data
      */
     private StatusData statusData;
+    /**
+     * used to determine if our app is used by user
+     */
+    private boolean isActive;
 
     @Override
     public void onCreate() {
@@ -49,6 +54,7 @@ public class YamblaApplication extends Application implements OnSharedPreference
         preferences.registerOnSharedPreferenceChangeListener(this);
 
         statusData = new StatusData(this);
+        isActive = false;
         Log.i(TAG, "onCreate");
     }
 
@@ -133,15 +139,33 @@ public class YamblaApplication extends Application implements OnSharedPreference
         return preferences;
     }
 
-    public boolean isServiceRunning() {
-        return isServiceRunning;
-    }
-
-    public void setServiceRunning(boolean serviceRunning) {
-        isServiceRunning = serviceRunning;
-    }
-
     public String getProvider() {
         return preferences.getString(getString(R.string.pref_key_provider), DEFAULT_LOCATION_PROVIDER);
+    }
+
+    public long getInterval() {
+        return Long.parseLong(preferences.getString(getString(R.string.pref_key_interval), "0"));
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    static void createServiceAlarm(Context context) {
+        long interval = ((YamblaApplication) context.getApplicationContext()).getInterval();
+        if (interval == INTERVAL_NEVER) {
+            return;
+        }
+
+        final Intent intent = new Intent(context, UpdaterService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, -1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
+                System.currentTimeMillis(), interval, pendingIntent);
     }
 }

@@ -37,17 +37,13 @@ public class BaseActivity extends Activity {
                         .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                 break;
 
-            case R.id.menu_toggle_service:
-                if (application.isServiceRunning()) {
-                    stopService(new Intent(this, UpdaterService.class));
-                } else {
-                    startService(new Intent(this, UpdaterService.class));
-                }
-                break;
-
             case R.id.menu_purge:
                 application.getStatusData().purge();
                 Toast.makeText(this, R.string.msg_data_purged, Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.menu_refresh:
+                startService(new Intent(this, UpdaterService.class));
                 break;
 
             case R.id.menu_timeline:
@@ -64,17 +60,15 @@ public class BaseActivity extends Activity {
         return true;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        application.setActive(false);
+    }
 
     @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        MenuItem toggleItem = menu.findItem(R.id.menu_toggle_service);
-        if (application.isServiceRunning()) {
-            toggleItem.setTitle(R.string.menu_title_service_stop);
-            toggleItem.setIcon(android.R.drawable.ic_media_pause);
-        } else {
-            toggleItem.setTitle(R.string.menu_title_service_start);
-            toggleItem.setIcon(android.R.drawable.ic_media_play);
-        }
-        return true;
+    protected void onResume() {
+        super.onResume();
+        application.setActive(true);
     }
 }
