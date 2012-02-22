@@ -13,7 +13,7 @@
 
     <!-- Text output  -->
     <ListView android:layout_height="fill_parent" android:layout_width="fill_parent"
-              android:id="@+id/timeline_list" android:background="#6000"
+              android:id="@+id/timeline_list" android:background="#6000" android:cacheColorHint="#00000000"
             />
 
 </LinearLayout>
